@@ -21,7 +21,7 @@ public class Servlet1 extends HttpServlet {
 		res.addCookie(ck);
 	   
 		out.print("<form action = 'servlet2'  method='post'> ");
-		out.print(" <input type='submit' value='Go' >");
+		out.print(" <input type='submit' value='Go To Servlet 2' >");
 		out.print("</form>");
 		
 	}
