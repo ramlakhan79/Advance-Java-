@@ -2,8 +2,7 @@ package com.servin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
-import org.apache.tomcat.util.http.parser.Cookie;
+import jakarta.servlet.http.Cookie;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,17 +14,26 @@ public void doPost(HttpServletRequest request, HttpServletResponse response)thro
     response.setContentType("text/html");  
     PrintWriter out = response.getWriter();  
       
-    jakarta.servlet.http.Cookie[] ck=request.getCookies();
+    Cookie[] ck=request.getCookies();
+    String name = "";
+    boolean f = false;
     for(int i=0;i<ck.length;i++) {
-    	out.print("<br><h1>Hello "+ck[i].getValue()+" Welcome Back to Sistec</h1>" );
+    	String skey = ck[i].getName();
+    	if(skey.equals("userName")) {
+    		name=ck[i].getValue();
+    		f=true;
+    		break;
+    	}     
     }   
-    
-    //String name;
-	//name = request.getParameter("userName");		
-	
-	//out.print("<h1>Hello "+name +" Welcome Back to Sistec</h1>");
+    if(f==true) {
+    	out.print("<br><h1>Hello "+name+" Welcome Back to Sistec</h1>" );
+    }
+    else {
+    	out.print("<br><h1>You Are New User </h1>" );    	
+    }   
+  
 	out.print("<h1>Thank You</h1>"); 
-	out.print("<h1><a href='index.html' >Go Back </a></h1>");
+	out.print("<h1><a href='index.html' >Go To Home Page </a></h1>");
           
     }  
       
